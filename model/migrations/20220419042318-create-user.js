@@ -20,6 +20,9 @@ module.exports = {
       password: {
         type: Sequelize.STRING
       },
+      isVet: {
+        type: Sequelize.INTEGER
+      },
       email: {
         type: Sequelize.STRING
       },

@@ -11,9 +11,23 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       
-      User.belongsTo(models.Post, {
+      this.hasMany(models.Post, {
         foreignKey : 'userId', as: 'posts'
       })
+
+      this.hasMany(models.Pet, {
+        foreignKey : 'ownerId', as: 'pets'
+      })
+
+      this.belongsTo(model.User,{
+        foreignKey : 'vetId', as: 'vetUser'
+      })
+
+      this.hasMany(models.User, {
+        foreignKey : 'vetId', as: 'vets'
+      })
+
+
 
     }
   }
@@ -22,6 +36,7 @@ module.exports = (sequelize, DataTypes) => {
     apellido: DataTypes.STRING,
     usuario: DataTypes.STRING,
     password: DataTypes.STRING,
+    isVet: DataTypes.INTEGER,
     email: DataTypes.STRING
   }, {
     sequelize,
