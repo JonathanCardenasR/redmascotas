@@ -23,6 +23,22 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey : 'vetId', as: 'vets'
       })
 
+      this.hasMany(models.Group, {
+        foreignKey : 'creatorId', as: 'myGroups'
+      })
+
+      this.belongsToMany(models.Group, {
+        through: 'members'
+      })
+
+      this.belongsToMany(models.User, {
+        through: 'friends'
+      })
+      
+      this.belongsToMany(models.User, {
+        through: 'friends'
+      })
+
 
 
     }
