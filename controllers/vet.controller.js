@@ -1,10 +1,27 @@
 const db = require('../model/models')
 
+const getCreateVet = (req,res) =>{
+    res.render('create-vet')
+}
+
 const createVet = async (req,res) =>{
     
-    res.render('login')
+    const idUser = req.params.id
+    const nombre = req.body.nombre
+    const direccion = req.body.direccion
+    const telefono = req.body.telefono
+
+    await db.Vet.create({
+        nombre:  nombre,
+        direccion: direccion,
+        telefono: telefono,
+        vetUserId: idUser
+    })
+
+    return res.render('page-vet')
 }
 
 module.exports = {
-    createVet
+    createVet,
+    getCreateVet
 }
