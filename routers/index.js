@@ -11,7 +11,7 @@ router.get('/', homeController.getHome)
 router.get('/vet/create/:id', vetController.getCreateVet)
 router.post('/vet/create', vetController.createVet)
 
-router.get('/user/change_pass/', userController.getChangePass)
+router.get('/user/change_pass/:id', userController.getChangePass)
 router.put('/user/change_pass/', userController.changePass)
 
 module.exports = router;

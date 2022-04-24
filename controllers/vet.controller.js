@@ -1,12 +1,15 @@
 const db = require('../model/models')
 
 const getCreateVet = (req,res) =>{
-    res.render('create-vet')
+
+    const idUser = req.params.id  
+    res.render('create-vet',{userId : idUser})
+    
 }
 
 const createVet = async (req,res) =>{
     
-    const idUser = req.params.id
+    const idUser = req.body.id
     const nombre = req.body.nombre
     const direccion = req.body.direccion
     const telefono = req.body.telefono
