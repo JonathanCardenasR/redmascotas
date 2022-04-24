@@ -4,12 +4,12 @@ const getCreateVet = (req,res) =>{
 
     const idUser = req.params.id  
     res.render('create-vet',{userId : idUser})
-    
+
 }
 
 const createVet = async (req,res) =>{
     
-    const idUser = req.body.id
+    const idUser = req.params.id
     const nombre = req.body.nombre
     const direccion = req.body.direccion
     const telefono = req.body.telefono

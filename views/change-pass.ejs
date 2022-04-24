@@ -36,8 +36,9 @@
   <body class="text-center">   
     
     <main class="form-signin">
-      <form method="put" action="">
+      <form method="post" action="/user/change_pass/<%= userId %>">
         
+        <input type="hidden" name="_method" value="PUT">
 
         <img class="mb-4 pr-2" src="" width="200" height="200">
         
