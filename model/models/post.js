@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       this.belongsTo(models.User, {
         foreignKey : 'userId', as : 'User'
       })
-
+      
     }
   }
   Post.init({
