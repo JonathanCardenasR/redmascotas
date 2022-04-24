@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('message', {
+    await queryInterface.createTable('Message', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -49,8 +49,8 @@ module.exports = {
 
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.removeConstraint('Member','FK_MESSAGE_USER')
-    await queryInterface.removeConstraint('Member','FK_MESSAGE_CONVERSATION')
-    await queryInterface.dropTable('message');
+    await queryInterface.removeConstraint('Message','FK_MESSAGE_USER')
+    await queryInterface.removeConstraint('Message','FK_MESSAGE_CONVERSATION')
+    await queryInterface.dropTable('Message');
   }
 };

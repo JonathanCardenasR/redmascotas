@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
 
     }
   }
-  Friends.init({
+  Friend.init({
     userMain: DataTypes.INTEGER,
     userSub: DataTypes.INTEGER
   }, {
