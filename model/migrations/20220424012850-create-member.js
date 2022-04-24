@@ -46,6 +46,8 @@ module.exports = {
 
   },
   async down(queryInterface, Sequelize) {
+    await queryInterface.removeConstraint('Member','FK_MEMBER_USER')
+    await queryInterface.removeConstraint('Member','FK_MEMBER_GROUP')
     await queryInterface.dropTable('Member');
   }
 };

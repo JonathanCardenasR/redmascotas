@@ -11,34 +11,36 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       
+      //tabla de post con el dueño del post
       this.hasMany(models.Post, {
         foreignKey : 'userId', as: 'posts'
       })
 
+      //tabla de pet con el id del dueño
       this.hasMany(models.Pet, {
         foreignKey : 'ownerId', as: 'pets'
       })
 
-      //tabla de grupo creador
+      //tabla de grupo con el id creador
       this.hasMany(models.User, {
-        foreignKey : 'vetId', as: 'vets'
+        foreignKey : 'vetUserId', as: 'vets'
       })
 
-      //tabla de grupo creador
+      //tabla de grupo con el id creador
       this.hasMany(models.Group, {
         foreignKey : 'creatorId', as: 'myGroups'
       })
 
-      //tabla de miembros
+      //tabla de member
       this.hasMany(models.Member, {
         foreignKey : 'userId'
       })
 
-      //tabla de amigos
+      //tabla de friend
       this.hasMany(models.Member, {
         foreignKey : 'userMain'
       })
-      //tabla de amigos
+      //tabla de friend
       this.hasMany(models.Friend, {
         foreignKey : 'userSub'
       })
