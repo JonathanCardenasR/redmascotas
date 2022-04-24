@@ -51,6 +51,6 @@ module.exports = {
   async down(queryInterface, Sequelize) {
     await queryInterface.removeConstraint('Message','FK_MESSAGE_USER')
     await queryInterface.removeConstraint('Message','FK_MESSAGE_CONVERSATION')
-    await queryInterface.dropTable('Message');
+    await queryInterface.dropTable('Message',{restartIdentity: true});
   }
 };

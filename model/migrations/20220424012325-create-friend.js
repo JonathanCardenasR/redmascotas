@@ -47,6 +47,6 @@ module.exports = {
   async down(queryInterface, Sequelize) {
     await queryInterface.removeConstraint('Friend','FK_FRIEND_USERMAIN')
     await queryInterface.removeConstraint('Friend','FK_FRIEND_USERSUB')
-    await queryInterface.dropTable('Friend');
+    await queryInterface.dropTable('Friend',{restartIdentity: true});
   }
 };

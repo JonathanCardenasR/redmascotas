@@ -49,13 +49,13 @@ await queryInterface.bulkInsert('Message', [
   {converId: 1,text: 'texto2-1', userId: 2,createdAt: new Date(), updatedAt: new Date()},
   {converId: 1,text: 'texto3-1', userId: 1,createdAt: new Date(), updatedAt: new Date()},
   {converId: 1,text: 'texto4-1', userId: 2,createdAt: new Date(), updatedAt: new Date()},
-  {convertId: 2,text: 'texto1-2', userId: 4,createdAt: new Date(), updatedAt: new Date()},
-  {convertId: 2,text: 'texto2-2', userId: 6,createdAt: new Date(), updatedAt: new Date()},
-  {convertId: 2,text: 'texto3-2', userId: 4,createdAt: new Date(), updatedAt: new Date()},
+  {converId: 2,text: 'texto1-2', userId: 4,createdAt: new Date(), updatedAt: new Date()},
+  {converId: 2,text: 'texto2-2', userId: 6,createdAt: new Date(), updatedAt: new Date()},
+  {converId: 2,text: 'texto3-2', userId: 4,createdAt: new Date(), updatedAt: new Date()},
 ]);
 
 
-await queryInterface.bulkInsert('Member', [
+await queryInterface.bulkInsert('Friend', [
   {userMain: 1, userSub: 2,createdAt: new Date(), updatedAt: new Date()},
   {userMain: 1, userSub: 3,createdAt: new Date(), updatedAt: new Date()},
   {userMain: 1, userSub: 4,createdAt: new Date(), updatedAt: new Date()},
@@ -64,7 +64,7 @@ await queryInterface.bulkInsert('Member', [
   {userMain: 2, userSub: 1,createdAt: new Date(), updatedAt: new Date()},
 ]);
 
-await queryInterface.bulkInsert('Friend', [
+await queryInterface.bulkInsert('Member', [
   {groupId: 1, userId: 1,createdAt: new Date(), updatedAt: new Date()},
   {groupId: 1, userId: 3,createdAt: new Date(), updatedAt: new Date()},
   {groupId: 1, userId: 4,createdAt: new Date(), updatedAt: new Date()},

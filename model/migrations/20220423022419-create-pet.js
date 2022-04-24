@@ -25,6 +25,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Pet');
+    await queryInterface.dropTable('Pet',{restartIdentity: true});
   }
 };

@@ -28,6 +28,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Vet');
+    await queryInterface.dropTable('Vet',{restartIdentity: true});
   }
 };
