@@ -3,7 +3,7 @@ const db = require('../model/models')
 const getHome = async (req,res) =>{
     
     const grupos = await db.Group.findAll(
-        {include: ['miembros', db.Member] }
+        {include: 'miembros' }
     ) 
 
     /*
