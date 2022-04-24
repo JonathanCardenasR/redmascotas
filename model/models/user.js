@@ -19,27 +19,29 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey : 'ownerId', as: 'pets'
       })
 
+      //tabla de grupo creador
       this.hasMany(models.User, {
         foreignKey : 'vetId', as: 'vets'
       })
 
+      //tabla de grupo creador
       this.hasMany(models.Group, {
         foreignKey : 'creatorId', as: 'myGroups'
       })
 
-      this.belongsToMany(models.Group, {
-        through: 'members'
+      //tabla de miembros
+      this.hasMany(models.Member, {
+        foreignKey : 'userId'
       })
 
-      this.belongsToMany(models.User, {
-        through: 'friends'
+      //tabla de amigos
+      this.hasMany(models.Member, {
+        foreignKey : 'userMain'
       })
-      
-      this.belongsToMany(models.User, {
-        through: 'friends'
+      //tabla de amigos
+      this.hasMany(models.Friend, {
+        foreignKey : 'userSub'
       })
-
-
 
     }
   }

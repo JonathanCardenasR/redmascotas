@@ -19,6 +19,11 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey : 'creatorId', as: 'groupOwner'
       })
 
+      //tabla de miembros
+      this.hasMany(models.Member,{
+        foreignKey: 'groupId'
+      })
+
       
 
     }
