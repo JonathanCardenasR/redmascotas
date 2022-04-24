@@ -7,10 +7,12 @@ const userController = require('../controllers/user.controller')
 const vetController = require('../controllers/vet.controller')
 
 router.get('/', homeController.getHome)
-router.get('/', homeController.getHome)
 
 router.get('/vet/create/:id', vetController.getCreateVet)
 router.post('/vet/create', vetController.createVet)
+
+router.get('/user/change_pass/', userController.getChangePass)
+router.put('/user/change_pass/', userController.changePass)
 
 module.exports = router;
 

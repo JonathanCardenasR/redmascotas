@@ -1,5 +1,9 @@
 const db = require('../model/models')
 
+const getChangePass = async (req,res) =>{
+    res.render('change-pass')
+}
+
 const changePass = async (req,res) =>{
     
     const idUser = req.params.id
@@ -30,5 +34,6 @@ const changePass = async (req,res) =>{
 }
 
 module.exports = {
-    changePass
+    changePass,
+    getChangePass
 }
