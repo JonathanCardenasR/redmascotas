@@ -15,6 +15,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey : 'vetUserId', as: 'vetUser'
       })
 
+      this.hasMany(models.Service, {
+        foreignKey : 'vetId', as: 'services'
+      })
+
     }
   }
   Vet.init({
