@@ -17,9 +17,7 @@
 
     </div>
 
-    <form method="post" action="/vet/create">
-
-        <input name="id" type="hidden"  value="<%= userId %>" class="form-control" />
+    <form method="post" action="/vet/create/<%= userId %>">
 
         <label class="form-label">Nombre:</label>
         <input name="nombre" type="text" class="form-control mb-2" required />

@@ -8,37 +8,36 @@ const getChangePass = async (req,res) =>{
 }
 
 const changePass = async (req,res) =>{
-
-    console.log(pass1,pass2)
-    
+  
     const idUser = req.params.id
-    const pass1 = req.params.password1
-    const pass2 = req.params.password2
-
+    const pass1 = req.body.password1
+    const pass2 = req.body.password2
+    
+    
     console.log(pass1,pass2)
 
     if(pass1!=pass2){
-        alert('contraseñas equivocadas')
-        return res.redirect('user/change_pass' + idUser)
+        console.log('contraseñas equivocadas')
+        return res.redirect('/user/change_pass/'+ idUser)
     }
 
     var user
 
     try {
-        user = db.User.findOne({
+        user = await db.User.findOne({
             where: {id :idUser}
         })
     } catch (error) {
         console.log(error)
-        alert('No se encontro id de usuario')
-        return res.render('change-pass')
+        console.log('No se encontro id de usuario')
+        return res.redirect('/user/change_pass/'+ idUser)
     }
 
     user.password = pass1
 
     await user.save()
 
-    return res.render('login')
+    return res.redirect('/')
 }
 
 module.exports = {
