@@ -1,0 +1,14 @@
+% switch (rol) {
+    case 'admin' : %>
+    <%- include('menuadmin')  %>
+            <% break;
+    
+    case 'user' : %>
+    <%- include('BarraBusqueda')  %>
+            <% break;
+    
+    default : %>
+    <%- include('headear-1')  %>
+            <% break;
+    
+    } %> 
