@@ -2,11 +2,11 @@ const db = require('../model/models')
 
 const getHome = async (req,res) =>{
     
+    /*
     const grupos = await db.Group.findAll(
         {include: 'miembros' }
     ) 
 
-    /*
     const user = await db.User.findAll({})
     const veterinaria = await db.Vet.findAll({include: 'services'})
     const servicios = await db.Service.findAll({})
