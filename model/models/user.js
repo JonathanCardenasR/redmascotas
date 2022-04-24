@@ -31,18 +31,23 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey : 'creatorId', as: 'myGroups'
       })
 
-      //tabla de member
+      //tabla intermedia de member
       this.hasMany(models.Member, {
         foreignKey : 'userId'
       })
 
-      //tabla de friend
+      //tabla intermedia de friend
       this.hasMany(models.Member, {
         foreignKey : 'userMain'
       })
-      //tabla de friend
+      //tabla intermedia de friend
       this.hasMany(models.Friend, {
         foreignKey : 'userSub'
+      })
+
+      // tabla intermedia de message
+      this.hasMany(models.message, {
+        foreignKey : 'userId'
       })
 
     }
