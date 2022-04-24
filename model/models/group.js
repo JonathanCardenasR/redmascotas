@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
 
       //tabla de miembros
       this.hasMany(models.Member,{
-        foreignKey: 'groupId'
+        foreignKey: 'groupId', as: 'miembros'
       }) 
 
     }
