@@ -18,10 +18,11 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Service.init({
-    estilo: DataTypes.STRING
+    nombre: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Service',
+    freezeTableName : true
   });
   return Service;
 };

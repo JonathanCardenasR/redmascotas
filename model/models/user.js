@@ -10,45 +10,6 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      
-      //tabla de post con el dueño del post
-      this.hasMany(models.Post, {
-        foreignKey : 'userId', as: 'posts'
-      })
-
-      //tabla de pet con el id del dueño
-      this.hasMany(models.Pet, {
-        foreignKey : 'ownerId', as: 'pets'
-      })
-
-      //tabla de grupo con el id creador
-      this.hasMany(models.User, {
-        foreignKey : 'vetUserId', as: 'vets'
-      })
-
-      //tabla de grupo con el id creador
-      this.hasMany(models.Group, {
-        foreignKey : 'creatorId', as: 'myGroups'
-      })
-
-      //tabla intermedia de member
-      this.hasMany(models.Member, {
-        foreignKey : 'userId'
-      })
-
-      //tabla intermedia de friend
-      this.hasMany(models.Member, {
-        foreignKey : 'userMain'
-      })
-      //tabla intermedia de friend
-      this.hasMany(models.Friend, {
-        foreignKey : 'userSub'
-      })
-
-      // tabla intermedia de message
-      this.hasMany(models.message, {
-        foreignKey : 'userId'
-      })
 
     }
   }
