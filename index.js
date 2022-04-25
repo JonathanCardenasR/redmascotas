@@ -20,6 +20,10 @@ app.get('/politicas',(req, res) =>{
     const textoRespuesta = "Sesion Iniciada"
     res.render('politicas')
 })
+app.get('/page',(req, res) =>{
+    const textoRespuesta = "Sesion Iniciada"
+    res.render('page-vet')
+})
 
 
 app.listen(PORT, ()=> {
