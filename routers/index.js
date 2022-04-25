@@ -7,6 +7,9 @@ const userController = require('../controllers/user.controller')
 const vetController = require('../controllers/vet.controller')
 
 router.get('/', homeController.getHome)
+router.get('/pol', (req, res) =>{
+    res.render('politicas');
+})
 
 router.get('/vet/create/:id', vetController.getCreateVet)
 router.post('/vet/create/:id', vetController.createVet)
