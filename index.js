@@ -10,7 +10,7 @@ const server = http.createServer(app);
 
 const io = socketio(server);
 
-const botName = 'ChatCord Bot';
+const botName = 'Sistema';
 
 const formatMessage = require('./utils/messages');
 const {
@@ -30,14 +30,14 @@ io.on('connection', socket => {
       socket.join(user.room);
   
       // Welcome current user
-      socket.emit('message', formatMessage(botName, 'Welcome to ChatCord!'));
+      socket.emit('message', formatMessage(botName, 'Bienvenido a PetBook Chat!'));
   
       // Broadcast when a user connects
       socket.broadcast
         .to(user.room)
         .emit(
           'message',
-          formatMessage(botName, `${user.username} has joined the chat`)
+          formatMessage(botName, `${user.username} se unido a la conversación`)
         );
   
       // Send users and room info
@@ -61,7 +61,7 @@ io.on('connection', socket => {
       if (user) {
         io.to(user.room).emit(
           'message',
-          formatMessage(botName, `${user.username} has left the chat`)
+          formatMessage(botName, `${user.username} salio de la conversación`)
         );
   
         // Send users and room info
@@ -123,12 +123,9 @@ app.get('/users', async (req, res)=> {
 })
 
 
-
-
 //CRUDS  MODIFICAR
 app.get('/users/modificar/:codigo', async (req, res) => {
     const idUser = req.params.codigo
-
     
     const user = await db.User.findOne({
         wher : {
@@ -136,8 +133,6 @@ app.get('/users/modificar/:codigo', async (req, res) => {
         }
     })
 })
-
-
 
 app.get('/pets/modificar',(req, res) => {
     
