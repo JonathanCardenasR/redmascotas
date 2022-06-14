@@ -12,10 +12,32 @@
         <%- include('header-rol') %>
         <h2>Formulario Usuario</h2>
         <form method="post" action="/users/update">
+            <input type="hidden" name="user_id" value="<%= user.id %>"/>
             <div>
                 <label class="form-label">Nombre:</label>
-                <input name="user_nombre" type="text" class="form-control"/>
+                <input name="user_nombre" type="text" class="form-control" value="<%= user.nombre %>"/>
             </div>
+            <div class="mb-2">
+                <label class="form-label">Apellido:</label>
+                <input name="user_apellido" type="text" class="form-control" value="<%= user.apellido %>"/>
+            </div>
+            <div class="mb-4">
+                <label class="form-label">Usuario:</label>
+                <input name="user_usuario" type="text" class="form-control" value="<%= user.usuario %>"/>
+            </div>
+            <div class="mb-4">
+                <label class="form-label">Contraseña:</label>
+                <input name="user_constraseña" type="text" class="form-control" value="<%= user.password %>"/>
+            </div>
+            <div class="mb-4">
+                <label class="form-label">Correo:</label>
+                <input name="user_correo" type="text" class="form-control" value="<%= user.email %>"/>
+            </div>
+            <div class="mb-4">
+                <label class="form-label">Foto:</label>
+                <input name="user_foto" type="text" class="form-control" value="<%= user.foto %>"/>
+            </div>
+            <button type="submit" class="btn btn-success">Guardar</button>
         </form>
         <%- include('footer') %>
     </body>
