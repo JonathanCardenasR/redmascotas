@@ -117,7 +117,7 @@ app.post('/login', (req, res) => {
   const usuario = req.body.username
   const password = req.body.password
 
-  if (username == "pw" && password == "123") {
+  if (usuario == "pw" && password == "123") {
       // Login correcto
       req.session.username = usuario // guardando variable en sesion
       res.redirect("/")
