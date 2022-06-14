@@ -109,10 +109,10 @@ app.get('/users', async (req, res)=> {
 
     if (dif >= 3 * 60 * 60 * 1000) {
         req.session.destroy() // Destruyes la sesion
-        res.render('/login')
+        res.render('/politicas')
     }else {
         // Obtener usuarios de la base de datos
-        const userss = await db.User.findAll({
+        const users = await db.User.findAll({
             order : [
                 ['id', 'DESC']
             ]
@@ -131,7 +131,7 @@ app.get('/users/update/:codigo', async (req, res) => {
     const idUser = req.params.codigo
     
     const user = await db.User.findOne({
-        wher : {
+        where : {
             id : idUser
         }
     })
