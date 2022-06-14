@@ -14,8 +14,6 @@ const getChat = async (req,res) =>{
 
 const postChat = async (req,res) =>{
 
-
-
     res.redirect('/chat')
 }
 
