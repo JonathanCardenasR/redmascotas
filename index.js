@@ -50,8 +50,14 @@ app.get('/users', async (req, res)=> {
     }
 
 })
+
+
+
+
 //CRUDS  MODIFICAR
-app.get('/users/modificar/:codigo',(req, res) => {
+/*
+
+app.get('/users/modificar/:codigo', async (req, res) => {
     const idUser = req.params.codigo
 
     
@@ -62,6 +68,9 @@ app.get('/users/modificar/:codigo',(req, res) => {
     })
 })
 
+*/
+
 app.get('/pets/modificar',(req, res) => {
     
 })
+
