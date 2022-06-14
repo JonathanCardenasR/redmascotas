@@ -129,13 +129,7 @@ app.post('/login', (req, res) => {
 */
 // 
 app.get('/users', async (req, res)=> {
-    const timestampActual = new Date().getTime();
-    const dif = timestampActual - req.session.lastLogin
-
-    if (dif >= 3 * 60 * 60 * 1000) {
-        req.session.destroy() // Destruyes la sesion
-        res.render('/politicas')
-    }else {
+    
         // Obtener usuarios de la base de datos
         const users = await db.User.findAll({
             order : [
@@ -146,7 +140,7 @@ app.get('/users', async (req, res)=> {
           users : users
         })
 
-    }
+    
 
 })
 
