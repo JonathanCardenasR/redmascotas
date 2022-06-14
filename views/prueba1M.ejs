@@ -5,53 +5,64 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet"  href="/css/mapa.css">
 </head>
 <body>
-    <style>
-        #map {
-          height: 100%;
-        }
-        html, body {
-          height: 100%;
-          margin: 0;
-          padding: 0;
-        }
-    </style>
-      
-    <div id="map"> </div>
+   <section>
+    <div class="container">
+        <div id="map"></div>
+    </div>
+   </section>
+
     <script async
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBaHUKvFd5uxL33jJh4KTNLEIuXLRDHbaI&callback=initMap">
     </script>
     <script>
-        const mapDiv = document.getElementById("map");
+        //varibles globales
         let map;
+        let marker;
+        //GEO
+        let watchID;
+        let geoloc;
+
+        const mapDiv = document.getElementById("map");
+        
         function initMap(){
             map = new google.maps.Map(mapDiv, {
             center: { lat: -12.04318, lng: -77.02824 },
             zoom: 12,
             });
+            marker = new google.maps.Marker({
+                position : { lat: -12.0860497, lng: -76.9765101167364},
+                map,
+                title: "holas"
+            });
+            getPosition();
         }
-
-        /*
-        function initMap() {
-
-        const uluru = { lat: -25.344, lng: 131.031 };
-
-        const map = new google.maps.Map(document.getElementById("map"), {
-        zoom: 4,
-        center: uluru,
-        });
-
-        const marker = new google.maps.Marker({
-         position: uluru,
-        map: map,
-        });
+        function getPosition(){
+            if(navigator.geolocation){
+                var options = {timeout:60000};
+                geoloc = navigator.geolocation;
+                watchID = geoloc.watchPosition(showLocationOnMap, errorHandler, options);
+            }else{
+                alert("error")
+            }
         }
+        function showLocationOnMap(position) {
+            var latitud = position.coords.latitude;
+            var longitud = position.coords.longitude;
+            console.log("Latitud: "+ latitud +", " + "Longitud: "+ longitud);
 
-        window.initMap = initMap;
-*/
+            const myLatLng = {lat: latitud, lng: longitud};
+            marker.setPosition(myLatLng);
+        }
+        function errorHandler(err) {
+        if (err.code == 1){
+            alert("Error: Acceso denegado!");
+        } else if(err.code == 2){
+            alert("Error: Position no existe o no encontrada");
+        }
+    }
     </script>
-
-    
 </body>
 </html>
