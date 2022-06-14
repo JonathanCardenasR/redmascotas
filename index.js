@@ -117,6 +117,9 @@ app.get('/users', async (req, res)=> {
                 ['id', 'DESC']
             ]
         });
+        res.render('users',{
+          users : users
+        })
 
     }
 
@@ -124,7 +127,7 @@ app.get('/users', async (req, res)=> {
 
 
 //CRUDS  MODIFICAR
-app.get('/users/modificar/:codigo', async (req, res) => {
+app.get('/users/update/:codigo', async (req, res) => {
     const idUser = req.params.codigo
     
     const user = await db.User.findOne({
@@ -132,9 +135,49 @@ app.get('/users/modificar/:codigo', async (req, res) => {
             id : idUser
         }
     })
+    res.render('users_update',{
+      user : user
+    })
 })
 
-app.get('/pets/modificar',(req, res) => {
+app.post('/users/update',async (req, res)=>{
+  const idUser = req.body.user_id
+  const nombre = req.body.user_nombre
+  const apellido = req.body.user_apellido
+  const usuario = req.body.user_usuario
+  const contraseña = req.body.user_contraseña
+  const correo = req.body.user_correo
+  const foto = req.body.user_foto
+
+  const user = db.User.findOne({
+    where :{
+      id : idUser
+    }
+  })
+  user.nombre = nombre
+  user.apellido = apellido
+  user.usuario = usuario
+  user.contraseña = contraseña
+  user.correo = correo
+  user.foto = foto
+
+  user.save()
+
+  res.redirect('/users')
+})
+
+app.get('/pets/update',(req, res) => {
     
 })
 
+//CRUD ELIMINAR
+
+app.get('/users/eliminar/:codigo', async (req, res) => {
+  const idUser = req.params.codigo
+  await db.User.destroy({
+    where:{
+      id : idUser
+    }
+  })
+  res.redirect('/users')
+})
