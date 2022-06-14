@@ -26,6 +26,11 @@ app.get('/page',(req, res) =>{
     res.render('page-vet')
 })
 
+app.get('/map',(req, res) =>{
+    const textoRespuesta = "Sesion Iniciada"
+    res.render('prueba1M')
+})
+
 
 app.listen(PORT, ()=> {
     console.log(`El servidor se inicio correctamente en el puerto ${PORT}`)
