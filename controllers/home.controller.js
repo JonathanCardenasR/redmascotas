@@ -22,7 +22,7 @@ const getHome = async (req,res) =>{
     console.log(veterinaria[0].nombre)
     console.log(veterinaria[0].services[0].nombre) */
 
-    res.render('home')
+    res.render('page-userProfile')
 
 }
 
