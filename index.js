@@ -102,6 +102,31 @@ server.listen(PORT, ()=> {
     console.log(`El servidor se inicio correctamente en el puerto ${PORT}`)
 })
 
+//LOGIN
+app.get('/login', (req, res)=> {
+  if (req.session.username != undefined) {
+      req.session.lastLogin = new Date().getTime()
+      res.redirect('/')
+  }else {
+      res.render('login')
+  }
+  
+})
+
+app.post('/login', (req, res) => {
+  const usuario = req.body.username
+  const password = req.body.password
+
+  if (username == "pw" && password == "123") {
+      // Login correcto
+      req.session.username = usuario // guardando variable en sesion
+      res.redirect("/")
+  }else {
+      res.redirect('/login')
+  }
+})
+
+
 // 
 app.get('/users', async (req, res)=> {
     const timestampActual = new Date().getTime();
