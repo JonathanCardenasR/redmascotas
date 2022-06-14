@@ -26,6 +26,12 @@ module.exports = {
       foto: {
         type: Sequelize.STRING
       },
+      fotoPortada: {
+        type: Sequelize.STRING
+      },
+      listaAmigos: {
+        type: Sequelize.INTEGER
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
