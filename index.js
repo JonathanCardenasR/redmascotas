@@ -101,7 +101,7 @@ app.get('/map',(req, res) =>{
 server.listen(PORT, ()=> {
     console.log(`El servidor se inicio correctamente en el puerto ${PORT}`)
 })
-
+/*
 //LOGIN
 app.get('/login', (req, res)=> {
   if (req.session.username != undefined) {
@@ -126,7 +126,7 @@ app.post('/login', (req, res) => {
   }
 })
 
-
+*/
 // 
 app.get('/users', async (req, res)=> {
     const timestampActual = new Date().getTime();
