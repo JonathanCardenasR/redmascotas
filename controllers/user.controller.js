@@ -7,6 +7,23 @@ const getChangePass = async (req,res) =>{
     res.render('change-pass',{userId : idUser})
 }
 
+const getChat = async (req,res) =>{
+
+    res.render('chat')
+}
+
+const postChat = async (req,res) =>{
+
+
+
+    res.redirect('/chat')
+}
+
+const getChatPrincipal = async (req,res) =>{
+
+    res.render('chat-global')
+}
+
 const changePass = async (req,res) =>{
   
     const idUser = req.params.id
@@ -42,5 +59,8 @@ const changePass = async (req,res) =>{
 
 module.exports = {
     changePass,
-    getChangePass
+    getChangePass,
+    getChat,
+    getChatPrincipal,
+    postChat
 }
