@@ -7,10 +7,10 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
     "start:dev": "npx nodemon index.js",
-    "db:drop": "npx sequelize db:drop --config ./dao/config/config.json",
-    "db:create": "npx sequelize db:create --config ./dao/config/config.json",
-    "db:migrate": "npx sequelize db:migrate --config ./dao/config/config.json --migrations-path ./dao/migrations",
-    "db:seed": "npx sequelize db:seed:all --config ./dao/config/config.json --seeders-path ./dao/seeders"
+    "db:drop": "npx sequelize db:drop --config ./model/config/config.json",
+    "db:create": "npx sequelize db:create --config ./model/config/config.json",
+    "db:migrate": "npx sequelize db:migrate --config ./model/config/config.json --migrations-path ./model/migrations",
+    "db:seed": "npx sequelize db:seed:all --config ./model/config/config.json --seeders-path ./model/seeders"
   },
   "author": "",
   "license": "ISC",

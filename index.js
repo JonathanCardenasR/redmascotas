@@ -101,40 +101,106 @@ app.get('/map',(req, res) =>{
 server.listen(PORT, ()=> {
     console.log(`El servidor se inicio correctamente en el puerto ${PORT}`)
 })
+/*
+//LOGIN
+app.get('/login', (req, res)=> {
+  if (req.session.username != undefined) {
+      req.session.lastLogin = new Date().getTime()
+      res.redirect('/')
+  }else {
+      res.render('login')
+  }
+  
+})
 
+app.post('/login', (req, res) => {
+  const usuario = req.body.username
+  const password = req.body.password
+
+  if (usuario == "pw" && password == "123") {
+      // Login correcto
+      req.session.username = usuario // guardando variable en sesion
+      res.redirect("/")
+  }else {
+      res.redirect('/login')
+  }
+})
+
+*/
 // 
 app.get('/users', async (req, res)=> {
-    const timestampActual = new Date().getTime();
-    const dif = timestampActual - req.session.lastLogin
-
-    if (dif >= 3 * 60 * 60 * 1000) {
-        req.session.destroy() // Destruyes la sesion
-        res.render('/login')
-    }else {
+    
         // Obtener usuarios de la base de datos
-        const userss = await db.User.findAll({
+        const users = await db.User.findAll({
             order : [
                 ['id', 'DESC']
             ]
         });
+        res.render('users',{
+          users : users
+        })
 
-    }
+    
 
 })
 
 
 //CRUDS  MODIFICAR
-app.get('/users/modificar/:codigo', async (req, res) => {
+app.get('/users/update/:codigo', async (req, res) => {
     const idUser = req.params.codigo
     
     const user = await db.User.findOne({
-        wher : {
+        where : {
             id : idUser
         }
     })
+    res.render('users_update',{
+      user : user
+    })
 })
 
-app.get('/pets/modificar',(req, res) => {
+app.post('/users/update',async (req, res)=>{
+  const idUser = req.body.user_id
+  const nombre = req.body.user_nombre
+  const apellido = req.body.user_apellido
+  const usuario = req.body.user_usuario
+  const contraseña = req.body.user_contraseña
+  const correo = req.body.user_correo
+  const foto = req.body.user_foto
+
+  const user = await db.User.findOne({
+    where :{
+      id : idUser
+    }
+  })
+  
+  user.nombre = nombre
+  user.apellido = apellido
+  user.usuario = usuario
+  user.contraseña = contraseña
+  user.correo = correo
+  user.foto = foto
+
+  console.log
+  await user.save()
+
+
+
+  res.redirect('/users')
+})
+
+app.get('/pets/update',(req, res) => {
     
 })
 
+//CRUD ELIMINAR
+
+app.get('/users/eliminar/:codigo', async (req, res) => {
+  const idUser = req.params.codigo
+  await db.User.destroy({
+    where:{
+      id : idUser
+    }
+  })
+  res.redirect('/users')
+})
