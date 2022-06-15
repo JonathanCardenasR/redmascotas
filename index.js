@@ -168,11 +168,12 @@ app.post('/users/update',async (req, res)=>{
   const correo = req.body.user_correo
   const foto = req.body.user_foto
 
-  const user = db.User.findOne({
+  const user = await db.User.findOne({
     where :{
       id : idUser
     }
   })
+  
   user.nombre = nombre
   user.apellido = apellido
   user.usuario = usuario
@@ -180,7 +181,10 @@ app.post('/users/update',async (req, res)=>{
   user.correo = correo
   user.foto = foto
 
-  user.save()
+  console.log
+  await user.save()
+
+
 
   res.redirect('/users')
 })
