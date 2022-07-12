@@ -87,9 +87,17 @@ app.get('/politicas',(req, res) =>{
     const textoRespuesta = "Sesion Iniciada"
     res.render('politicas')
 })
-app.get('/page',(req, res) =>{
-    const textoRespuesta = "Sesion Iniciada"
-    res.render('page-vet')
+app.get('/page', async (req, res) => {
+
+    const posts = await db.Post.findAll({
+      order : [
+        ['id','DESC']
+      ]
+    });
+    res.render('page-vet',{
+      posts : posts
+    })
+  
 })
 
 app.get('/map',(req, res) =>{
@@ -140,8 +148,7 @@ app.get('/users', async (req, res)=> {
           users : users
         })
 
-    
-
+  
 })
 
 
