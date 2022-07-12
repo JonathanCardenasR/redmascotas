@@ -12,7 +12,8 @@ const io = socketio(server);
 
 const botName = 'Sistema';
 
-const formatMessage = require('./utils/messages');
+const formatMessage = require('./model/mensajeModelo');
+
 const {
   userJoin,
   getCurrentUser,
@@ -26,18 +27,22 @@ app.set('views', __dirname + "/views")
 io.on('connection', socket => {
     socket.on('joinRoom', ({ username, room }) => {
       const user = userJoin(socket.id, username, room);
+
+      let mensajeSaludo = new formatMessage(botName, 'Bienvenido a PetBook Chat!')
   
       socket.join(user.room);
   
       // Welcome current user
-      socket.emit('message', formatMessage(botName, 'Bienvenido a PetBook Chat!'));
-  
+      socket.emit('message', mensajeSaludo);
+
+      let mensajeInicio = new formatMessage(botName, `${user.username} se unido a la conversación`)
+
       // Broadcast when a user connects
       socket.broadcast
         .to(user.room)
         .emit(
           'message',
-          formatMessage(botName, `${user.username} se unido a la conversación`)
+          mensajeInicio 
         );
   
       // Send users and room info
@@ -50,8 +55,8 @@ io.on('connection', socket => {
     // Listen for chatMessage
     socket.on('chatMessage', msg => {
       const user = getCurrentUser(socket.id);
-  
-      io.to(user.room).emit('message', formatMessage(user.username, msg));
+      let mensaje= new formatMessage(user.username, msg)
+      io.to(user.room).emit('message', mensaje);
     });
   
     // Runs when client disconnects
@@ -59,9 +64,10 @@ io.on('connection', socket => {
       const user = userLeave(socket.id);
   
       if (user) {
+        let mensajeSalida = new formatMessage(botName, `${user.username} salio de la conversación`)
         io.to(user.room).emit(
           'message',
-          formatMessage(botName, `${user.username} salio de la conversación`)
+          mensajeSalida
         );
   
         // Send users and room info
