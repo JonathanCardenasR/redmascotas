@@ -19,6 +19,7 @@ const {
   userLeave,
   getRoomUsers
 } = require('./utils/users');
+const { post } = require('./routers');
 
 app.set('views', __dirname + "/views")
 
@@ -210,4 +211,26 @@ app.get('/users/eliminar/:codigo', async (req, res) => {
     }
   })
   res.redirect('/users')
+})
+
+//NUEVA PUBLICACION
+app.get('/post/create', async (req, res) => {
+	
+  res.render('page-vet')
+})
+
+app.post('/post/create', async (req, res) => {
+  const postTitulo= req.body.postTitulo
+  const postBody = req.body.postBody
+
+  
+
+  db.Post.create({
+      titulo : postTitulo,
+      body : postBody
+      
+      
+  })
+
+  res.redirect('/page')
 })

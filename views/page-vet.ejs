@@ -16,14 +16,27 @@
     
     <h2>Publicaciones</h2>
     <!-- <a class="btn btn-success" href="#">Nuevo</a> -->
-    <div>¿En qué están pensando?</div>
+    <div>¿En qué estás pensando?</div>
+   
+    <form method="post" action="/post/create">
+
+        <label class="form-label">Titulo:</label>
+        <input name="postTitulo" type="text" class="form-control mb-2" required />
+
+        <label class="form-label">Contenido:</label>
+        <input name="postBody" type="text" class="form-control mb-2" required/>
+
+        <button type="submit" class="btn btn-success mt-2">Publicar</button>
+
+    </form>
+
     <table class="table table-hover">
         <thead>
             <tr>
                 <th>Usuario</th>
                 <th>Titulo</th>
                 <th>Body</th>
-                <th>Acciones</th>
+                
             </tr>
         </thead>
         <tbody>
@@ -34,9 +47,7 @@
                     <td><%= post.titulo %></td>
                     <td><%= post.body %></td>
             
-                    <td>
-                       
-                    </td>
+                    
                 </tr>               
             <%}) %>
             
