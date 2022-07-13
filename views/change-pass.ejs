@@ -33,7 +33,10 @@
     <link href="/css/signin.css" rel="stylesheet">
   </head>
 
-  <body class="text-center">   
+  <body class="text-center">  
+    <header>
+      <%- include('BarraBusqueda')%>
+  </header>
     
     <main class="form-signin">
       <form method="post" action="/user/change_pass/<%= userId %>">

@@ -110,6 +110,7 @@ app.get('/map',(req, res) =>{
     res.render('prueba1M')
 })
 
+
 app.get('/home',(req, res) =>{
   const textoRespuesta = "Sesion Iniciada"
   res.render('home')
