@@ -2,11 +2,17 @@ const { Router } = require('express');
 
 const router = Router();
 
+const homeController2 = require ('../controllers/home.controller2')
+const homeController0 = require('../controllers/home.controller0')
 const homeController = require('../controllers/home.controller')
 const userController = require('../controllers/user.controller')
 const vetController = require('../controllers/vet.controller')
 
-router.get('/', homeController.getHome)
+router.get('/',homeController0.getPrincipal)
+
+router.get('/PetBook',homeController2.getPetBook)
+
+router.get('/Perfil', homeController.getHome)
 
 router.get('/chat', userController.getChat)
 

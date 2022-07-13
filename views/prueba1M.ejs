@@ -6,17 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet"  href="/css/mapa.css">
+    
 </head>
 <body>
-   <section>
-    <div class="container">
-        <div id="map"></div>
-    </div>
-   </section>
-
-    <script async
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBaHUKvFd5uxL33jJh4KTNLEIuXLRDHbaI&callback=initMap">
-    </script>
+    <header>
+        <%- include('BarraBusqueda')%>
+    </header>
+        <div id="map" style="z-index: 3;
+        position: fixed;
+        height: 100%;
+        width: 100%;
+        padding: 0px;
+        border-width: 0px;
+        margin: 0px;
+        left: 0px;
+        top: 0px;
+        touch-action: pan-x pan-y;">
+        </div>
+        
+    
 
 
 
@@ -24,7 +32,13 @@
     <script>
         //varibles globales
         let map;
-        let marker;
+        let marker,i;
+        var locations = [
+            ['Vet1', -12.0499, -77.03],
+            ['Vet2', -12.0499, -77.04],
+            ['Vet3', -12.0499, -77.01],
+            ['Vet4', -12.0499, -77.07],
+        ];
         //GEO
         let watchID;
         let geoloc;
@@ -34,15 +48,26 @@
         function initMap(){
             map = new google.maps.Map(mapDiv, {
             center: { lat: -12.04318, lng: -77.02824 },
-            zoom: 12,
+            zoom: 14,
             });
-            marker = new google.maps.Marker({
-                position : { lat: -12.0860497, lng: -76.9765101167364},
-                map,
-                title: "holas"
-            });
-            getPosition();
-        }
+            var infowindow = new google.maps.InfoWindow();
+            for (i = 0; i < locations.length; i++) { 
+                marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+                    map: map
+                });
+
+                google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                    return function() {
+                        infowindow.setContent(locations[i][0]);
+                        infowindow.open(map, marker);
+                    }
+                })(marker, i));
+            }
+            }
+            getPosition()
+
+
         function getPosition(){
             if(navigator.geolocation){
                 var options = {timeout:60000};
@@ -52,13 +77,18 @@
                 alert("error")
             }
         }
+        var image = {
+        url: "img/Marcador1.png",
+        };
+
         function showLocationOnMap(position) {
+            var myMarker = new google.maps.Marker({position: new google.maps.LatLng(position.coords.latitude, position.coords.longitude),icon:image});
             var latitud = position.coords.latitude;
             var longitud = position.coords.longitude;
             console.log("Latitud: "+ latitud +", " + "Longitud: "+ longitud);
 
-            const myLatLng = {lat: latitud, lng: longitud};
-            marker.setPosition(myLatLng);
+            map.setCenter(myMarker.position);
+            myMarker.setMap(map);
         }
         function errorHandler(err) {
         if (err.code == 1){
@@ -68,5 +98,8 @@
         }
     }
     </script>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBaHUKvFd5uxL33jJh4KTNLEIuXLRDHbaI&libraries=places&callback=initMap">
+        </script>
 </body>
 </html>

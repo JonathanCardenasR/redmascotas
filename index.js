@@ -5,14 +5,19 @@ const app = require('./app')
 const db = require('./model/models')
 const http = require('http');
 const socketio = require('socket.io');
-
+const bcrypt = require('bcrypt')
 const server = http.createServer(app);
+const express = require('express')
 
 const io = socketio(server);
 
 const botName = 'Sistema';
 
-const formatMessage = require('./utils/messages');
+const formatMessage = require('./model/mensajeModelo');
+
+const usuarios = []
+
+
 const {
   userJoin,
   getCurrentUser,
@@ -23,22 +28,29 @@ const { post } = require('./routers');
 
 app.set('views', __dirname + "/views")
 
+
+app.use(express.urlencoded({ extended: false }))
+
 // Run when client connects
 io.on('connection', socket => {
     socket.on('joinRoom', ({ username, room }) => {
       const user = userJoin(socket.id, username, room);
+
+      let mensajeSaludo = new formatMessage(botName, 'Bienvenido a PetBook Chat!')
   
       socket.join(user.room);
   
       // Welcome current user
-      socket.emit('message', formatMessage(botName, 'Bienvenido a PetBook Chat!'));
-  
+      socket.emit('message', mensajeSaludo);
+
+      let mensajeInicio = new formatMessage(botName, `${user.username} se unido a la conversación`)
+
       // Broadcast when a user connects
       socket.broadcast
         .to(user.room)
         .emit(
           'message',
-          formatMessage(botName, `${user.username} se unido a la conversación`)
+          mensajeInicio 
         );
   
       // Send users and room info
@@ -51,8 +63,8 @@ io.on('connection', socket => {
     // Listen for chatMessage
     socket.on('chatMessage', msg => {
       const user = getCurrentUser(socket.id);
-  
-      io.to(user.room).emit('message', formatMessage(user.username, msg));
+      let mensaje= new formatMessage(user.username, msg)
+      io.to(user.room).emit('message', mensaje);
     });
   
     // Runs when client disconnects
@@ -60,9 +72,10 @@ io.on('connection', socket => {
       const user = userLeave(socket.id);
   
       if (user) {
+        let mensajeSalida = new formatMessage(botName, `${user.username} salio de la conversación`)
         io.to(user.room).emit(
           'message',
-          formatMessage(botName, `${user.username} salio de la conversación`)
+          mensajeSalida
         );
   
         // Send users and room info
@@ -105,6 +118,42 @@ app.get('/map',(req, res) =>{
     const textoRespuesta = "Sesion Iniciada"
     res.render('prueba1M')
 })
+
+app.get('/home',(req, res) =>{
+  const textoRespuesta = "Sesion Iniciada"
+  res.render('home')
+})
+
+app.post('/home',(req, res) =>{
+  
+})
+
+app.get('/Register',(req, res) =>{
+  const textoRespuesta = "Sesion Iniciada"
+  res.render('Register.ejs')
+})
+
+app.post('/Register', async (req, res) => {
+    try {
+    const hashedPassword = await bcrypt.hash(req.body.contraseña, 10)
+    usuarios.push({
+      id: Date.now().toString(),
+      usuario: req.body.usuario,
+      email: req.body.email,
+      contraseña: hashedPassword
+    })
+    res.redirect('/home')
+  } catch {
+    res.redirect('/Register')
+  }
+  console.log(usuarios)
+})
+app.get('/page-userProfile',(req, res) =>{
+  const textoRespuesta = "Sesion Iniciada"
+  res.render('page-userProfile')
+})
+
+
 
 
 server.listen(PORT, ()=> {
