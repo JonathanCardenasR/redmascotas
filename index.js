@@ -103,6 +103,23 @@ app.get('/map',(req, res) =>{
     res.render('prueba1M')
 })
 
+app.get('/home',(req, res) =>{
+  const textoRespuesta = "Sesion Iniciada"
+  res.render('home')
+})
+
+app.get('/Register',(req, res) =>{
+  const textoRespuesta = "Sesion Iniciada"
+  res.render('Register')
+})
+
+app.get('/page-userProfile',(req, res) =>{
+  const textoRespuesta = "Sesion Iniciada"
+  res.render('page-userProfile')
+})
+
+
+
 
 server.listen(PORT, ()=> {
     console.log(`El servidor se inicio correctamente en el puerto ${PORT}`)
