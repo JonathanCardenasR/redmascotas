@@ -24,6 +24,7 @@ const {
   userLeave,
   getRoomUsers
 } = require('./utils/users');
+const { post } = require('./routers');
 
 app.set('views', __dirname + "/views")
 
@@ -100,9 +101,17 @@ app.get('/politicas',(req, res) =>{
     const textoRespuesta = "Sesion Iniciada"
     res.render('politicas')
 })
-app.get('/page',(req, res) =>{
-    const textoRespuesta = "Sesion Iniciada"
-    res.render('page-vet')
+app.get('/page', async (req, res) => {
+
+    const posts = await db.Post.findAll({
+      order : [
+        ['id','DESC']
+      ]
+    });
+    res.render('page-vet',{
+      posts : posts
+    })
+  
 })
 
 app.get('/map',(req, res) =>{
@@ -190,8 +199,7 @@ app.get('/users', async (req, res)=> {
           users : users
         })
 
-    
-
+  
 })
 
 
@@ -253,4 +261,26 @@ app.get('/users/eliminar/:codigo', async (req, res) => {
     }
   })
   res.redirect('/users')
+})
+
+//NUEVA PUBLICACION
+app.get('/post/create', async (req, res) => {
+	
+  res.render('page-vet')
+})
+
+app.post('/post/create', async (req, res) => {
+  const postTitulo= req.body.postTitulo
+  const postBody = req.body.postBody
+
+  
+
+  db.Post.create({
+      titulo : postTitulo,
+      body : postBody,
+      
+      
+  })
+
+  res.redirect('/page')
 })

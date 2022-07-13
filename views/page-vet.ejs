@@ -6,12 +6,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pagina Vet</title>
 </head>
-<body>
+<body class="container">
     <header>
         <%- include('BarraBusqueda')%>
     </header>
 
+   
     <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
+    
+    <h2>Publicaciones</h2>
+    <!-- <a class="btn btn-success" href="#">Nuevo</a> -->
+    <div>¿En qué estás pensando?</div>
+   
+    <form method="post" action="/post/create">
+
+        <label class="form-label">Titulo:</label>
+        <input name="postTitulo" type="text" class="form-control mb-2" required />
+
+        <label class="form-label">Contenido:</label>
+        <input name="postBody" type="text" class="form-control mb-2" required/>
+
+        <button type="submit" class="btn btn-success mt-2">Publicar</button>
+
+    </form>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Usuario</th>
+                <th>Titulo</th>
+                <th>Body</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            <% posts.forEach( (post) => { %>
+                <tr>
+                  
+                    <td><%= post.userId %></td>
+                    <td><%= post.titulo %></td>
+                    <td><%= post.body %></td>
+            
+                    
+                </tr>               
+            <%}) %>
+            
+        </tbody>
+    </table>
+
+    
     <ul class="list-unstyled d-flex">
         <li class="ms-3">
             <a href=>

@@ -75,9 +75,9 @@ await queryInterface.bulkInsert('Member', [
 
 await queryInterface.bulkInsert('Post', [
   {titulo: 'titulo1',body:'publicacion texto 1', asWho:0 ,idWho:1, userId: 1, opId:null,createdAt: new Date(), updatedAt: new Date()},
-  {titulo: null,body:'publicacion texto 1-1', asWho:0 ,idWho:2, userId: 2, opId:1,createdAt: new Date(), updatedAt: new Date()},
-  {titulo: null,body:'publicacion texto 1-2', asWho:0 ,idWho:3, userId: 3, opId:1,createdAt: new Date(), updatedAt: new Date()},
-  {titulo: null,body:'publicacion texto 1-3', asWho:0 ,idWho:1, userId: 1, opId:1,createdAt: new Date(), updatedAt: new Date()},
+  {titulo: 'titulo2',body:'publicacion texto 1-1', asWho:0 ,idWho:2, userId: 2, opId:1,createdAt: new Date(), updatedAt: new Date()},
+  {titulo: 'titulo3',body:'publicacion texto 1-2', asWho:0 ,idWho:3, userId: 3, opId:1,createdAt: new Date(), updatedAt: new Date()},
+  {titulo: 'titulo4',body:'publicacion texto 1-3', asWho:0 ,idWho:1, userId: 1, opId:1,createdAt: new Date(), updatedAt: new Date()},
 
 ]);
 
