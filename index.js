@@ -227,7 +227,7 @@ app.post('/post/create', async (req, res) => {
 
   db.Post.create({
       titulo : postTitulo,
-      body : postBody
+      body : postBody,
       
       
   })
