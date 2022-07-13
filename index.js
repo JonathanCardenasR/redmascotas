@@ -5,14 +5,18 @@ const app = require('./app')
 const db = require('./model/models')
 const http = require('http');
 const socketio = require('socket.io');
-
+const bcrypt = require('bcrypt')
 const server = http.createServer(app);
+const express = require('express')
 
 const io = socketio(server);
 
 const botName = 'Sistema';
 
 const formatMessage = require('./model/mensajeModelo');
+
+const usuarios = []
+
 
 const {
   userJoin,
@@ -22,6 +26,9 @@ const {
 } = require('./utils/users');
 
 app.set('views', __dirname + "/views")
+
+
+app.use(express.urlencoded({ extended: false }))
 
 // Run when client connects
 io.on('connection', socket => {
@@ -108,11 +115,30 @@ app.get('/home',(req, res) =>{
   res.render('home')
 })
 
-app.get('/Register',(req, res) =>{
-  const textoRespuesta = "Sesion Iniciada"
-  res.render('Register')
+app.post('/home',(req, res) =>{
+  
 })
 
+app.get('/Register',(req, res) =>{
+  const textoRespuesta = "Sesion Iniciada"
+  res.render('Register.ejs')
+})
+
+app.post('/Register', async (req, res) => {
+    try {
+    const hashedPassword = await bcrypt.hash(req.body.contraseña, 10)
+    usuarios.push({
+      id: Date.now().toString(),
+      usuario: req.body.usuario,
+      email: req.body.email,
+      contraseña: hashedPassword
+    })
+    res.redirect('/home')
+  } catch {
+    res.redirect('/Register')
+  }
+  console.log(usuarios)
+})
 app.get('/page-userProfile',(req, res) =>{
   const textoRespuesta = "Sesion Iniciada"
   res.render('page-userProfile')
